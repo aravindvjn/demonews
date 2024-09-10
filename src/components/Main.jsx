@@ -72,7 +72,7 @@ const Main = () => {
     };
   
     fetchData();
-  },[apiKey]);
+  },[apiKey,URL,URL2]);
   
   if (!loading) {
     return <Loading />;

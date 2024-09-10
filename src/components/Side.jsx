@@ -37,7 +37,7 @@ const Side = () => {
     };
   
     fetchSideData();
-  }, [apiKey]);
+  }, [apiKey,URL]);
   return <div className="side-news col-4">{sideNews}</div>;
 };
 

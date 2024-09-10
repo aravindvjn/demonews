@@ -1,33 +1,35 @@
-name: Deploy React App
+name: Deploy React App to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Adjust the branch as needed
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14'  # Use the appropriate Node.js version
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build the app
-      run: npm run build
+      - name: Build project
+        run: npm run build
 
-    - name: Deploy to GitHub Pages
-      env:
-        REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
-      run: |
-        # Add deployment commands here
-        echo "Deploying with API_KEY=${REACT_APP_API_KEY}"
-        npm run deploy
+      - name: Configure Git identity
+        run: |
+          git config --global user.email "aravind284479@gmail.com"
+          git config --global user.name "aravind"
+
+      - name: Deploy to GitHub Pages
+        env:
+          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
+        run: npm run deploy

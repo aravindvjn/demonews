@@ -22,7 +22,6 @@ const Main = () => {
       setOtherMainNews(() => {
        if(data.articles){
         return data.articles.map((otherMainNew, index) => {
-          if (index !== 0) {
             return (
               <div className="other-main-news-child">
                 <h6>
@@ -36,7 +35,6 @@ const Main = () => {
                 <hr />
               </div>
             );
-          }
         });
        }else{
         return (<FetchingError/>)
@@ -73,7 +71,7 @@ const Main = () => {
 
   useEffect(() => {
     fetchData();
-  },[apiKey]);
+  },[apiKey,fetchData]);
   
   if (!loading) {
     return <Loading />;

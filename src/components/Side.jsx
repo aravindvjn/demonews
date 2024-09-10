@@ -36,7 +36,7 @@ const Side = () => {
 
   useEffect(() => {
     fetchSideData();
-  }, [apiKey]);
+  }, [apiKey,fetchSideData]);
   return <div className="side-news col-4">{sideNews}</div>;
 };
 

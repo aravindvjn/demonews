@@ -13,65 +13,66 @@ const Main = () => {
   const URL2 =
     `https://newsapi.org/v2/everything?q=bitcoin&apiKey=${apiKey}`;
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(URL);
-      const data = await response.json();
-      const response2 = await fetch(URL2);
-      const data2 = await response2.json();
-      setOtherMainNews(() => {
-       if(data.articles){
-        return data.articles.map((otherMainNew, index) => {
-            return (
-              <div className="other-main-news-child">
-                <h6>
-                  <img className="dot-image" src={dot} alt="" />
-                  {otherMainNew.publishedAt}
-                </h6>
-                <h3>
-                  <strong>{otherMainNew.title}</strong>
-                </h3>
-                <p>{otherMainNew.content || otherMainNew.description}</p>
-                <hr />
-              </div>
-            );
-        });
-       }else{
-        return (<FetchingError/>)
-       }
-      });
-      setOtherMainNews2(() => {
-       if(data2.articles){
-        return data2.articles.map((otherMainNew, index) => {
-            return (
-              <div className="other-main-news-child">
-                <h6>
-                  <img className="dot-image" src={dot} alt="" />
-                  {otherMainNew.publishedAt}
-                </h6>
-                <h3>
-                  <strong>{otherMainNew.title}</strong>
-                </h3>
-                <p>{otherMainNew.content || otherMainNew.description}</p>
-                <hr />
-              </div>
-            );
-      
-        });
-       }else{
-        return ( <FetchingError />)
-       }
-      });
-      setMainNews(data.articles[0]);
-      setLoading(true);
-    } catch (err) {
-      console.log("fetching Error", err);
-    }
-  };
-
+ 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(URL);
+        const data = await response.json();
+        const response2 = await fetch(URL2);
+        const data2 = await response2.json();
+        setOtherMainNews(() => {
+         if(data.articles){
+          return data.articles.map((otherMainNew, index) => {
+              return (
+                <div className="other-main-news-child">
+                  <h6>
+                    <img className="dot-image" src={dot} alt="" />
+                    {otherMainNew.publishedAt}
+                  </h6>
+                  <h3>
+                    <strong>{otherMainNew.title}</strong>
+                  </h3>
+                  <p>{otherMainNew.content || otherMainNew.description}</p>
+                  <hr />
+                </div>
+              );
+          });
+         }else{
+          return (<FetchingError/>)
+         }
+        });
+        setOtherMainNews2(() => {
+         if(data2.articles){
+          return data2.articles.map((otherMainNew, index) => {
+              return (
+                <div className="other-main-news-child">
+                  <h6>
+                    <img className="dot-image" src={dot} alt="" />
+                    {otherMainNew.publishedAt}
+                  </h6>
+                  <h3>
+                    <strong>{otherMainNew.title}</strong>
+                  </h3>
+                  <p>{otherMainNew.content || otherMainNew.description}</p>
+                  <hr />
+                </div>
+              );
+        
+          });
+         }else{
+          return ( <FetchingError />)
+         }
+        });
+        setMainNews(data.articles[0]);
+        setLoading(true);
+      } catch (err) {
+        console.log("fetching Error", err);
+      }
+    };
+  
     fetchData();
-  },[apiKey,fetchData]);
+  },[apiKey]);
   
   if (!loading) {
     return <Loading />;
